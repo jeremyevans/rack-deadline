@@ -1,0 +1,71 @@
+= rack-deadline
+
+rack-deadline is a simple rack middleware that automatically
+clears sessions that have been open too long (by default,
+1 day).
+
+This is designed for use with cookie stores to mitigate the
+risk of session fixation, since it is impossible to invalidate
+older sessions with a pure cookie-based approach.
+
+It is impossible to enforce a deadline with the standard rack
+cookie session API. The expire_after setting is not part of the
+session itself (it's part of the cookie, and not cryptographically
+signed), and an attacker who has access to a previous cookie can
+just omit it when making a request.
+
+This stores a deadline inside the crytographically signed session,
+and once the deadline is passed, the session will no longer be valid.
+
+= Installation
+
+  sudo gem install rack-deadline
+
+= Source Code
+
+Source code is available on GitHub at https://github.com/jeremyevans/rack-deadline
+
+= Usage
+
+First, require the library:
+
+  require 'rack-deadline'
+
+Then load the middleware, after you have loaded the middleware
+that sets up the session:
+
+  use Rack::Session::Deadline
+
+You can also provide options:
+
+  use Rack::Session::Deadline, :deadline=>3600, :key=>'_my_deadline'
+
+Options:
+
+:deadline :: The number of seconds from the start of the session until
+             the session is no longer valid.  By default this is 86400,
+             or 1 day.
+:key :: The hash key used inside the session to store the deadline. The
+        deadline is stored as an integer number of seconds from the unix
+        epoch.
+
+This has been tested on both Rails and Sinatra, but should work with any
+software that uses the Rack::Session::Abstract::ID API.
+
+= Tested On 
+
+* Ruby 1.8.7
+* Ruby 1.9.3
+* Ruby 2.0.0
+* Ruby 2.1.0
+* Rubinius 2.2.3
+* Rack 1.4.5
+* Rack 1.5.2
+
+= License
+
+MIT
+
+= Author
+
+Jeremy Evans <code@jeremyevans.net>
