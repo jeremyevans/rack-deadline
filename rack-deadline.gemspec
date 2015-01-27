@@ -1,6 +1,6 @@
 spec = Gem::Specification.new do |s|
   s.name = 'rack-deadline'
-  s.version = '1.0.0'
+  s.version = '1.0.1'
   s.platform = Gem::Platform::RUBY
   s.has_rdoc = true
   s.extra_rdoc_files = ["README.rdoc", "CHANGELOG", "MIT-LICENSE"]
@@ -9,7 +9,7 @@ spec = Gem::Specification.new do |s|
   s.summary = "Automatically clears sessions open too long"
   s.author = "Jeremy Evans"
   s.email = "code@jeremyevans.net"
-  s.homepage = "http://gihub.com/jeremyevans/rack-deadline"
+  s.homepage = "http://github.com/jeremyevans/rack-deadline"
   s.files = %w(MIT-LICENSE CHANGELOG README.rdoc Rakefile) + Dir["{lib,test}/**/*.rb"]
   s.description = <<END
 rack-deadline is a simple rack middleware that automatically
