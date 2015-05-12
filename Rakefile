@@ -1,7 +1,5 @@
 require "rake"
 require "rake/clean"
-require 'rake/testtask'
-
 
 CLEAN.include ["rack-deadline-*.gem", "rdoc", "coverage"]
 
@@ -12,14 +10,12 @@ end
 
 ### Tests
 
-desc "Run tests"
-Rake::TestTask.new do |t|
-  t.libs.push "lib"
-  t.test_files = FileList['test/*_test.rb']
-  t.verbose = true
+desc "Run specs"
+task :spec do
+  sh "#{FileUtils::RUBY} -rubygems -I lib test/rack-deadline_test.rb"
 end
 
-task :default=>:test
+task :default => :spec
 
 ### RDoc
 
