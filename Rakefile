@@ -12,7 +12,7 @@ end
 
 desc "Run specs"
 task :spec do
-  sh "#{FileUtils::RUBY} -rubygems -I lib test/rack-deadline_test.rb"
+  sh "#{FileUtils::RUBY} -I lib test/rack-deadline_test.rb"
 end
 
 task :default => :spec
