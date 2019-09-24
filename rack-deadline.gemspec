@@ -28,4 +28,5 @@ just omit it when making a request.
 This stores a deadline inside the crytographically signed session,
 and once the deadline is passed, the session will no longer be valid.
 END
+  s.add_development_dependency "minitest-global_expectations"
 end
