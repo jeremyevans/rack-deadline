@@ -12,7 +12,7 @@ end
 
 desc "Run specs"
 task :spec do
-  sh "#{FileUtils::RUBY} -I lib test/rack-deadline_test.rb"
+  sh "#{FileUtils::RUBY} #{"-w" if RUBY_VERSION >= '3'} -I lib test/rack-deadline_test.rb"
 end
 
 task :default => :spec
@@ -22,7 +22,6 @@ task :default => :spec
 RDOC_DEFAULT_OPTS = ["--quiet", "--line-numbers", "--inline-source", '--title', 'Rack::Session::Deadline: Automatically clears sessions open too long']
 
 begin
-  gem 'rdoc', '= 3.12.2'
   gem 'hanna-nouveau'
   RDOC_DEFAULT_OPTS.concat(['-f', 'hanna'])
 rescue Gem::LoadError
@@ -43,4 +42,3 @@ rdoc_task_class.new do |rdoc|
   rdoc.options += RDOC_OPTS
   rdoc.rdoc_files.add %w"README.rdoc CHANGELOG MIT-LICENSE lib/**/*.rb"
 end
-
